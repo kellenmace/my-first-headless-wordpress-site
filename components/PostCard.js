@@ -2,20 +2,6 @@ import Link from "next/link";
 import parse from "html-react-parser";
 import { gql } from "@apollo/client";
 
-export const POST_CARD_FIELDS = gql`
-  fragment PostCardFields on Post {
-    title
-    excerpt
-    uri
-    featuredImage {
-      node {
-        sourceUrl
-        altText
-      }
-    }
-  }
-`;
-
 export default function PostCard({ post }) {
   const { title, excerpt, uri, featuredImage } = post;
 

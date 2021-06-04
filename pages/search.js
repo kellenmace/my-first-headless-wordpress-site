@@ -2,25 +2,22 @@ import { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 
 import Layout from "../components/Layout";
-import PostsList, { POSTS_LIST_FIELDS } from "../components/PostsList";
+import PostsList from "../components/PostsList";
 
-const SEARCH_POSTS = gql`
-  query searchPosts($searchTerm: String!) {
-    posts(where: { search: $searchTerm }) {
-      nodes {
-        ...PostsListFields
-      }
-    }
-  }
-  ${POSTS_LIST_FIELDS}
-`;
+// Dummy data
+import { posts } from "../dummy-data";
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = useState("");
-  const { loading, error, data } = useQuery(SEARCH_POSTS, {
-    variables: { searchTerm },
-    notifyOnNetworkStatusChange: true,
-  });
+
+  const loading = false;
+  const error = false;
+  const data = {
+    posts: {
+      nodes: posts,
+    },
+  };
+
   const havePosts = Boolean(data?.posts?.nodes.length);
 
   return (
