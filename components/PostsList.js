@@ -1,14 +1,6 @@
 import { gql } from "@apollo/client";
 
-import PostCard, { POST_CARD_FIELDS } from "./PostCard";
-
-export const POSTS_LIST_FIELDS = gql`
-  fragment PostsListFields on Post {
-    databaseId
-    ...PostCardFields
-  }
-  ${POST_CARD_FIELDS}
-`;
+import PostCard from "./PostCard";
 
 export default function PostsList({ posts }) {
   return (

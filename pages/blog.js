@@ -2,18 +2,10 @@ import { gql } from "@apollo/client";
 
 import { client } from "../lib/apolloClient";
 import Layout from "../components/Layout";
-import PostsList, { POSTS_LIST_FIELDS } from "../components/PostsList";
+import PostsList from "../components/PostsList";
 
-const GET_POSTS = gql`
-  query getPosts {
-    posts(first: 18, after: null) {
-      nodes {
-        ...PostsListFields
-      }
-    }
-  }
-  ${POSTS_LIST_FIELDS}
-`;
+// Dummy data
+import { posts } from "../dummy-data";
 
 export default function Blog(props) {
   const { posts } = props;
@@ -27,13 +19,9 @@ export default function Blog(props) {
 }
 
 export async function getStaticProps() {
-  const response = await client.query({
-    query: GET_POSTS,
-  });
-
   return {
     props: {
-      posts: response.data.posts.nodes,
+      posts: posts,
     },
   };
 }
