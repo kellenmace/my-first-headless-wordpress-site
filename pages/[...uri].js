@@ -9,7 +9,7 @@ const formatDate = (date) => new Date(date).toLocaleDateString();
 
 export default function SinglePost({ post }) {
   const { date, title, content, author, categories } = post;
-  const hasCategories = Boolean(categories?.nodes?.length);
+  const haveCategories = Boolean(categories?.nodes?.length);
 
   return (
     <Layout>
@@ -19,7 +19,7 @@ export default function SinglePost({ post }) {
           ✍️ {author.node.name} on {formatDate(date)}
         </p>
         <div>{parse(content)}</div>
-        {hasCategories ? (
+        {haveCategories ? (
           <div className="category-list">
             <h4>Categorized As</h4>
             <ul>
