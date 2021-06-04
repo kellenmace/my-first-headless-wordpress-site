@@ -3,7 +3,7 @@ import parse from "html-react-parser";
 
 import { client } from "../../lib/apolloClient";
 import Layout from "../../components/Layout";
-import PostsList from "../../components/PostsList";
+import PostsList, { POSTS_LIST_FIELDS } from "../../components/PostsList";
 
 export default function SingleCategory({ category }) {
   return (
@@ -27,20 +27,12 @@ const GET_CATEGORY = gql`
       name
       posts(first: 18, after: null, where: { categoryName: $slugName }) {
         nodes {
-          databaseId
-          title
-          excerpt
-          uri
-          featuredImage {
-            node {
-              sourceUrl
-              altText
-            }
-          }
+          ...PostsListFields
         }
       }
     }
   }
+  ${POSTS_LIST_FIELDS}
 `;
 
 export async function getStaticProps(context) {

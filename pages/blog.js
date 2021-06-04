@@ -2,25 +2,17 @@ import { gql } from "@apollo/client";
 
 import { client } from "../lib/apolloClient";
 import Layout from "../components/Layout";
-import PostsList from "../components/PostsList";
+import PostsList, { POSTS_LIST_FIELDS } from "../components/PostsList";
 
 const GET_POSTS = gql`
   query getPosts {
     posts(first: 18, after: null) {
       nodes {
-        databaseId
-        title
-        excerpt
-        uri
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
+        ...PostsListFields
       }
     }
   }
+  ${POSTS_LIST_FIELDS}
 `;
 
 export default function Blog(props) {

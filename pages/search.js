@@ -2,25 +2,17 @@ import { useState } from "react";
 import { useQuery, gql } from "@apollo/client";
 
 import Layout from "../components/Layout";
-import PostsList from "../components/PostsList";
+import PostsList, { POSTS_LIST_FIELDS } from "../components/PostsList";
 
 const SEARCH_POSTS = gql`
   query searchPosts($searchTerm: String!) {
     posts(where: { search: $searchTerm }) {
       nodes {
-        databaseId
-        title
-        excerpt
-        uri
-        featuredImage {
-          node {
-            sourceUrl
-            altText
-          }
-        }
+        ...PostsListFields
       }
     }
   }
+  ${POSTS_LIST_FIELDS}
 `;
 
 export default function Search() {
